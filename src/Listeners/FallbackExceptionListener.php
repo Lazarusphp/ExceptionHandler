@@ -26,6 +26,7 @@ class FallbackExceptionListener implements ExceptionListenerInterface
             "Level"=>Level::Error->Label(),
             'message' => $e->getMessage(),
             'code' => $e->getCode(),
+
         ]);
 
         http_response_code(500);
@@ -34,6 +35,9 @@ class FallbackExceptionListener implements ExceptionListenerInterface
             'message' => $e->getMessage(),
             'Level'=>Level::Error,
             'code' => $e->getCode(),
+            "line" => __LINE__,
+            "File"=>__FILE__,
+            "trace"=>$e->getTraceAsString(),
         ],JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
     }
 }

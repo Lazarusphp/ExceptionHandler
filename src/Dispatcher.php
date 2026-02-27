@@ -7,7 +7,7 @@ use Throwable;
 class Dispatcher
 {
     private array $listeners = [];
-    private static array $registeredListeners = [];
+    protected static array $registeredListeners = [];
     
     public function __construct()
     {  
@@ -46,6 +46,7 @@ class Dispatcher
     public static function registerListener(?array $listener=null):void
     {
 
+        // check if Listeners = null;
         switch($listener)
         {
             case (count($listener) === 0): throw new LogicException("Parameter must have a value");
@@ -104,7 +105,7 @@ class Dispatcher
         
         // Set Http Response Code
         http_response_code(500);
-        echo "Unhandled Exception". $e->getMessage();
+        echo "Unhandled Exception ". $e->getMessage();
     }
 
     public function __destruct()
